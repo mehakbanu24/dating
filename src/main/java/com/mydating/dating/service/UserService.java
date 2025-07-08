@@ -113,4 +113,12 @@ public class UserService {
 			return ResponseEntity.status(HttpStatus.OK).body(users);
 	}
 
+	public ResponseEntity<?> searchByEmail(String letters) {
+		List<User> users = userDao.searchByEmail("%"+letters+"%");
+		if(users.isEmpty())
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No matching email found with letters"+letters);
+		else
+			return ResponseEntity.status(HttpStatus.OK).body(users);
+	}
+
 }
